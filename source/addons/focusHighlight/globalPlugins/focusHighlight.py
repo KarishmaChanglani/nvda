@@ -323,7 +323,6 @@ def createHighlightWin():
 
 	while windll.user32.GetMessageA(pMsg, NULL, 0, 0) != 0:
 		try:
-			msgToSentence(pMsg)
 			windll.user32.TranslateMessage(pMsg)
 			windll.user32.DispatchMessageA(pMsg)
 		except Exception as e:
@@ -331,18 +330,6 @@ def createHighlightWin():
 		if terminating:
 			break
 	return msg.wParam
-
-def msgToSentence(msg):
-	import re
-
-	#use regular expressions to separate message by punctuation into a list of words
-	textlist = re.split(r' *[\.\?!][\'"\)\]]* *', msg)
-	#By default first sentence
-	curr = 0
-	sentence = textlist[curr]
-
-#reads the entire paragraph with pauses between
-#for curr in textlist
 
 def destroyHighlightWin():
 	global wndclass
